@@ -1,0 +1,39 @@
+description: Lista de festivos Colombianos 2023
+source: https://www.festivos.com.co/
+holidays:
+- name: Año Nuevo
+  date: '2023-01-01'
+- name: Epifanía
+  date: '2023-01-09'
+- name: Día de San José
+  date: '2023-03-20'
+- name: Jueves Santo
+  date: '2023-04-06'
+- name: Viernes Santo
+  date: '2023-04-07'
+- name: Día del trabajo
+  date: '2023-05-01'
+- name: Ascención de Jesús
+  date: '2023-05-22'
+- name: Corpus Christi
+  date: '2023-06-12'
+- name: Sagrado Corazón de Jesús
+  date: '2023-06-19'
+- name: San Pedro y San Pablo
+  date: '2023-07-03'
+- name: Día de la independencia
+  date: '2023-07-20'
+- name: Batalla de Boyacá
+  date: '2023-08-07'
+- name: Asunción de la Virgen
+  date: '2023-08-21'
+- name: Día de la raza
+  date: '2023-10-16'
+- name: Todos los Santos
+  date: '2023-11-06'
+- name: Independencia de Cartagena
+  date: '2023-11-13'
+- name: Inmaculada Concepción
+  date: '2023-12-08'
+- name: Navidad
+  date: '2023-12-25'
