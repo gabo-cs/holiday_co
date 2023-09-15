@@ -22,6 +22,16 @@ class HolidayCoTest < Minitest::Test
     assert HolidayCo.is_holiday?("2023-01-01")
   end
 
+  def test_holiday_with_date_param
+    assert HolidayCo.is_holiday?(Date.new(2023, 01, 01))
+  end
+
+  def test_holiday_alias
+    assert_equal HolidayCo.holiday?, HolidayCo.is_holiday?
+    assert_equal HolidayCo.holiday?("2023-01-01"), HolidayCo.is_holiday?("2023-01-01")
+    assert_equal HolidayCo.holiday?(Date.new(2025, 01, 01)), HolidayCo.is_holiday?(Date.new(2025, 01, 01))
+  end
+
   def test_not_holiday
     refute HolidayCo.is_holiday?("2023-01-02")
   end

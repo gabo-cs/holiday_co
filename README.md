@@ -33,11 +33,27 @@ if HolidayCo.is_holiday?(date)
 end
 ```
 
+The argument can be a String, too.
+```ruby
+if HolidayCo.is_holiday?("2024-01-01")
+  puts "¡Feliz Año Nuevo!"
+end
+```
+
 If no date is provided, the gem will automatically default to today's date.
 ```ruby
 if HolidayCo.is_holiday?
   puts "Today is a holiday in Colombia!"
 end
+```
+
+You can also use the `holiday?` alias.
+```ruby
+if HolidayCo.holiday?(Date.tomorrow)
+  puts "What time is the party tomorrow?"
+end
+
+# `Date.tomorrow` is a Rails method
 ```
 
 List holidays for a specific year.
@@ -69,7 +85,7 @@ HolidayCo.holidays_dates(2023)
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub This project is intended to be a safe, welcoming space for collaboration.
+Bug reports and pull requests are welcome on GitHub. This project is intended to be a safe, welcoming space for collaboration.
 
 
 ## License

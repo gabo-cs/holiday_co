@@ -11,6 +11,8 @@ module HolidayCo
       Day.new(date).holiday?
     end
 
+    alias_method :holiday?, :is_holiday?
+
     def holidays(year = current_year)
       Year.new(year).holidays
     end
