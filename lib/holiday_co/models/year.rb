@@ -3,6 +3,7 @@
 require "yaml"
 
 module HolidayCo
+  # TODO: Tweak this to validate 2040+ years, because of the Pascua day thing.
   class YearDataNotAvailableError < StandardError
     def message
       "There is no data file available for the specified year (yet)."
@@ -17,12 +18,7 @@ module HolidayCo
     end
 
     def holidays
-      raise YearDataNotAvailableError unless year_data_available?
-
-      YAML
-        .load_file(File.expand_path("../../../../data/years/#{year}.yml", __FILE__))
-        .fetch("holidays", [])
-        .map { |h| h.transform_keys(&:to_sym) }
+      CalculateHolidays.for(year)
     end
 
     def holiday_names
