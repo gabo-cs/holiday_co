@@ -1,5 +1,16 @@
 # frozen_string_literal: true
-require 'date'
+
+require "date"
+
+module NextMondayRefinement
+  refine Date do
+    def next_monday
+      from_now = 1 - wday
+      from_now += 7 unless from_now > 0
+      self + from_now
+    end
+  end
+end
 
 #  Dates are in YYYY-MM-DD format
 module HolidayCo
@@ -8,7 +19,7 @@ module HolidayCo
       using NextMondayRefinement
 
       # Holidays that are moved to the following Monday
-      # if they don't fall on a Monday.
+      # if they don"t fall on a Monday.
       MOVABLE_HOLIDAYS = {
         "Epifanía" => "%4s-01-06",
         "Día de San José" => "%4s-03-19",
@@ -20,21 +31,15 @@ module HolidayCo
       }
 
       def self.for(year)
-        MOVABLE_HOLIDAYS.transform_values do |date|
+        MOVABLE_HOLIDAYS.map do |holiday, date|
           day = Date.parse(date % year)
-          day.monday? ? day : day.next_monday
+          date = day.monday? ? day : day.next_monday
+          {
+            :name => holiday,
+            :date => date.to_s
+          }
         end
       end
-    end
-  end
-end
-
-module NextMondayRefinement
-  refine Date do
-    def next_monday
-      from_now = 1 - wday
-      from_now += 7 unless from_now > 0
-      self + from_now
     end
   end
 end

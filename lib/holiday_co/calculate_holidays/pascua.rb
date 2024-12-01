@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require 'date'
+
+require "date"
+require_relative "../utils"
 
 #  Dates are in YYYY-MM-DD format
 module HolidayCo
@@ -29,11 +31,11 @@ module HolidayCo
       }
 
       def self.for(year)
-        pascua_day = Date.parse(HolidayCo.pascua_day_per_year[year])
+        pascua_day = Date.parse(HolidayCo.pascua_day_per_year(year.to_i)[year.to_s])
         PASCUA_HOLIDAYS.map do |holiday, ops|
           {
-            "name" => holiday,
-            "date" => pascua_day.public_send(ops[:operation], ops[:days])
+            :name => holiday,
+            :date => pascua_day.public_send(ops[:operation], ops[:days]).to_s
           }
         end
       end

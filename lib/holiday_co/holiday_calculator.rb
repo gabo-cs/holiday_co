@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'calculate_holidays/fixed'
+require_relative 'calculate_holidays/movable'
+require_relative 'calculate_holidays/pascua'
+
 # Source of Calculation Rules: https://www.festivos.com.co/calculo
 module HolidayCo
-  class CalculateHolidays
+  class HolidayCalculator
     attr_reader :year
 
     def self.for(year)
@@ -14,9 +18,9 @@ module HolidayCo
     end
 
     def calculate
-      raise SisaColeError unless some_validation?
-
-      fixed_holidays + pascua_holidays + movable_holidays
+      [fixed_holidays, pascua_holidays, movable_holidays]
+        .flatten
+        .sort_by! { |h| h[:date]}
     end
 
     private

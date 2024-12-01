@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require "yaml"
+require_relative "../holiday_calculator"
 
 module HolidayCo
-  # TODO: Tweak this to validate 2040+ years, because of the Pascua day thing.
   class YearDataNotAvailableError < StandardError
     def message
       "There is no data file available for the specified year (yet)."
@@ -18,7 +17,9 @@ module HolidayCo
     end
 
     def holidays
-      CalculateHolidays.for(year)
+      raise YearDataNotAvailableError unless year_data_available?
+
+      HolidayCalculator.for(year)
     end
 
     def holiday_names
@@ -32,13 +33,11 @@ module HolidayCo
     private
 
     def year_data_available?
-      available_years.include?(year)
+      available_years.include?(year.to_i)
     end
 
     def available_years
-      YAML
-        .load_file(File.expand_path("../../../../data/years.yml", __FILE__))
-        .map(&:to_s)
+      HolidayCo::AVAILABLE_YEARS
     end
   end
 end
