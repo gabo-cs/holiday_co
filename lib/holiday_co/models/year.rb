@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "yaml"
+require_relative "../holiday_calculator"
 
 module HolidayCo
   class YearDataNotAvailableError < StandardError
@@ -19,10 +19,7 @@ module HolidayCo
     def holidays
       raise YearDataNotAvailableError unless year_data_available?
 
-      YAML
-        .load_file(File.expand_path("../../../../data/years/#{year}.yml", __FILE__))
-        .fetch("holidays", [])
-        .map { |h| h.transform_keys(&:to_sym) }
+      HolidayCalculator.for(year)
     end
 
     def holiday_names
@@ -36,13 +33,11 @@ module HolidayCo
     private
 
     def year_data_available?
-      available_years.include?(year)
+      available_years.include?(year.to_i)
     end
 
     def available_years
-      YAML
-        .load_file(File.expand_path("../../../../data/years.yml", __FILE__))
-        .map(&:to_s)
+      HolidayCo::AVAILABLE_YEARS
     end
   end
 end

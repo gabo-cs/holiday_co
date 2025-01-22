@@ -1,4 +1,3 @@
-require "yaml"
 require "minitest/autorun"
 require_relative "../../../lib/holiday_co/models/year"
 
@@ -6,7 +5,7 @@ module HolidayCo
   class YearTest < Minitest::Test
     def setup
       @year = Year.new(2023)
-      @invalid_year = Year.new(1999)
+      @invalid_year = Year.new(1982)
     end
 
     def test_initialize
