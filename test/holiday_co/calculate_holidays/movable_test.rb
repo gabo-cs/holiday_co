@@ -40,6 +40,19 @@ class MovableTest < Minitest::Test
     assert_equal "2024-11-04", holidays.find { |holiday| holiday[:name] == "Todos los Santos" }[:date]
   end
 
+  def test_chiquinquira_holiday_exists_from_2026
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2026)
+
+    # July 9 falls on a Thursday in 2026, so it moves to Monday the 13th.
+    assert_equal "2026-07-13", holidays.find { |holiday| holiday[:name] == "Día de la Virgen del Rosario de Chiquinquirá" }[:date]
+  end
+
+  def test_chiquinquira_holiday_absent_before_2026
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2025)
+
+    assert_nil holidays.find { |holiday| holiday[:name] == "Día de la Virgen del Rosario de Chiquinquirá" }
+  end
+
   def test_movable_holiday_names_for_year
     holidays = HolidayCo::CalculateHolidays::Movable.for(2024)
 

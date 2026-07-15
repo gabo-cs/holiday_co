@@ -24,14 +24,23 @@ module HolidayCo
         "Epifanía" => "%4s-01-06",
         "Día de San José" => "%4s-03-19",
         "San Pedro y San Pablo" => "%4s-06-29",
+        "Día de la Virgen del Rosario de Chiquinquirá" => "%4s-07-09",
         "Asunción de la Virgen" => "%4s-08-15",
         "Día de la raza" => "%4s-10-12",
         "Todos los Santos" => "%4s-11-01",
         "Independencia de Cartagena" => "%4s-11-11"
       }
 
+      # Holidays introduced after 1983, keyed by the first year they apply.
+      # Ley 2578 de 2026 declared the Día de la Virgen del Rosario de Chiquinquirá.
+      EFFECTIVE_SINCE = {
+        "Día de la Virgen del Rosario de Chiquinquirá" => 2026
+      }
+
       def self.for(year)
-        MOVABLE_HOLIDAYS.map do |holiday, date|
+        MOVABLE_HOLIDAYS.filter_map do |holiday, date|
+          next if year.to_i < EFFECTIVE_SINCE.fetch(holiday, 0)
+
           day = Date.parse(date % year)
           date = day.monday? ? day : day.next_monday
           {

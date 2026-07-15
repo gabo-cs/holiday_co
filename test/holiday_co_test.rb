@@ -52,6 +52,14 @@ class HolidayCoTest < Minitest::Test
     end
   end
 
+  def test_chiquinquira_holiday_starting_2026
+    assert HolidayCo.is_holiday?("2026-07-13") # Ley 2578 de 2026
+    refute HolidayCo.is_holiday?("2025-07-14") # not a holiday the year before
+
+    assert_equal 19, HolidayCo.holidays(2026).length
+    assert_equal 18, HolidayCo.holidays(2025).length
+  end
+
   def test_holiday_names
     holiday_names = HolidayCo.holidays_names(2023)
 
