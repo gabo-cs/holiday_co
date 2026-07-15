@@ -23,8 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby
-        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        uses: ruby/setup-ruby@8e41b362d2589a22a44c1cfa214b3c83052c195b # v1.318.0
         with:
-          ruby-version: '3.0.5'
+          ruby-version: '3.3'
       - name: Run tests
         run: rake test
