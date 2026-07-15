@@ -9,5 +9,6 @@ Gem::Specification.new do |spec|
   spec.email         = ["gabrielomar2809@gmail.com"]
   spec.homepage      = "https://github.com/gabo-cs/holiday_co"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 3.0"
   spec.files = Dir["lib/**/*.rb"]
 end
