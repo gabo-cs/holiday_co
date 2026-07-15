@@ -1,9 +1,9 @@
 require "minitest/autorun"
-require_relative "../../../lib/holiday_co/calculate_holidays_module/movable"
+require_relative "../../../lib/holiday_co/calculate_holidays/movable"
 
-class CalculateHolidaysModuleMovableTest < Minitest::Test
+class MovableTest < Minitest::Test
   def test_movable_holidays_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Movable.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2024)
 
     assert holidays.is_a?(Array)
     assert holidays.length >= 7
@@ -18,7 +18,7 @@ class CalculateHolidaysModuleMovableTest < Minitest::Test
   end
 
   def test_movable_holidays_for_different_year
-    holidays = HolidayCo::CalculateHolidaysModule::Movable.for(2025)
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2025)
 
     assert_equal "2025-01-06", holidays.find { |holiday| holiday[:name] == "Epifanía" }[:date]
     assert_equal "2025-03-24", holidays.find { |holiday| holiday[:name] == "Día de San José" }[:date]
@@ -30,7 +30,7 @@ class CalculateHolidaysModuleMovableTest < Minitest::Test
   end
 
   def test_movable_holidays_for_non_monday_holidays
-    holidays = HolidayCo::CalculateHolidaysModule::Movable.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2024)
 
     assert_equal "2024-01-08", holidays.find { |holiday| holiday[:name] == "Epifanía" }[:date]
     assert_equal "2024-03-25", holidays.find { |holiday| holiday[:name] == "Día de San José" }[:date]
@@ -41,7 +41,7 @@ class CalculateHolidaysModuleMovableTest < Minitest::Test
   end
 
   def test_movable_holiday_names_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Movable.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Movable.for(2024)
 
     holiday_names = holidays.map { |holiday| holiday[:name] }
     assert_includes holiday_names, "Epifanía"

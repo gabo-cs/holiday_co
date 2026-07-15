@@ -1,9 +1,9 @@
 require "minitest/autorun"
-require_relative "../../../lib/holiday_co/calculate_holidays_module/fixed"
+require_relative "../../../lib/holiday_co/calculate_holidays/fixed"
 
-class CalculateHolidaysModuleTest < Minitest::Test
+class FixedTest < Minitest::Test
   def test_fixed_holidays_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Fixed.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Fixed.for(2024)
 
     assert holidays.is_a?(Array)
     assert holidays.length >= 6
@@ -17,7 +17,7 @@ class CalculateHolidaysModuleTest < Minitest::Test
   end
 
   def test_fixed_holidays_for_different_year
-    holidays = HolidayCo::CalculateHolidaysModule::Fixed.for(2025)
+    holidays = HolidayCo::CalculateHolidays::Fixed.for(2025)
 
     assert_equal "2025-01-01", holidays.find { |holiday| holiday[:name] == "Año Nuevo" }[:date]
     assert_equal "2025-05-01", holidays.find { |holiday| holiday[:name] == "Día del trabajo" }[:date]
@@ -28,7 +28,7 @@ class CalculateHolidaysModuleTest < Minitest::Test
   end
 
   def test_holiday_names_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Fixed.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Fixed.for(2024)
 
     holiday_names = holidays.map { |holiday| holiday[:name] }
     assert_includes holiday_names, "Año Nuevo"

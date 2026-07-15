@@ -1,9 +1,9 @@
 require "minitest/autorun"
-require_relative "../../../lib/holiday_co/calculate_holidays_module/pascua"
+require_relative "../../../lib/holiday_co/calculate_holidays/pascua"
 
 class PascuaTest < Minitest::Test
   def test_movable_holidays_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Pascua.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Pascua.for(2024)
 
     assert_equal "2024-03-28", holidays.find { |holiday| holiday[:name] == "Jueves Santo" }[:date]
     assert_equal "2024-03-29", holidays.find { |holiday| holiday[:name] == "Viernes Santo" }[:date]
@@ -13,7 +13,7 @@ class PascuaTest < Minitest::Test
   end
 
   def test_movable_holidays_for_different_year
-    holidays = HolidayCo::CalculateHolidaysModule::Pascua.for(2025)
+    holidays = HolidayCo::CalculateHolidays::Pascua.for(2025)
 
     assert_equal "2025-04-17", holidays.find { |holiday| holiday[:name] == "Jueves Santo" }[:date]
     assert_equal "2025-04-18", holidays.find { |holiday| holiday[:name] == "Viernes Santo" }[:date]
@@ -23,7 +23,7 @@ class PascuaTest < Minitest::Test
   end
 
   def test_pascua_holiday_names_for_year
-    holidays = HolidayCo::CalculateHolidaysModule::Pascua.for(2024)
+    holidays = HolidayCo::CalculateHolidays::Pascua.for(2024)
 
     holiday_names = holidays.map { |holiday| holiday[:name] }
     assert_includes holiday_names, "Jueves Santo"

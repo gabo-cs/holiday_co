@@ -1,4 +1,5 @@
 require "date"
+require_relative "errors"
 
 module HolidayCo
   # Colombian time zone is 5 hours behind UTC.
@@ -20,6 +21,8 @@ module HolidayCo
   end
 
   def self.pascua_day_per_year(year)
+    raise YearDataNotAvailableError unless AVAILABLE_YEARS.cover?(year)
+
     calculate_pascua_day_per_year(year)
   end
 

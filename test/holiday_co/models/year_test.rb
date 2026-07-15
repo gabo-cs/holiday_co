@@ -40,7 +40,7 @@ module HolidayCo
     def test_exception_message
       error = YearDataNotAvailableError.new
 
-      assert_equal "There is no data file available for the specified year (yet).", error.message
+      assert_equal "Colombian holidays can only be calculated for years 1983 through 9999.", error.message
     end
   end
 end

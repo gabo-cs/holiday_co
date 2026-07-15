@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "holiday_co/errors"
+require_relative "holiday_co/cache"
 require_relative "holiday_co/utils"
 require_relative "holiday_co/version"
 require_relative "holiday_co/models/day"

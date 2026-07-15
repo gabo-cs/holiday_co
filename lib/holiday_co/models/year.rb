@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
+require_relative "../errors"
 require_relative "../holiday_calculator"
 
 module HolidayCo
-  class YearDataNotAvailableError < StandardError
-    def message
-      "There is no data file available for the specified year (yet)."
-    end
-  end
-
   class Year
     attr_reader :year
 
