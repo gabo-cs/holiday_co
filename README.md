@@ -83,6 +83,26 @@ HolidayCo.holidays_dates(2023)
 => ["2023-01-01", "2023-01-09", "2023-03-20", "2023-04-06", "2023-04-07", "2...
 ```
 
+## How it works
+
+Holidays are calculated dynamically (fixed dates, Emiliani-law movable dates, and Pascua-based dates), so any year from 1983 through 9999 is supported — no per-year data files needed.
+
+## Caching
+
+Each year's holidays are calculated once and memoized in a small thread-safe, in-memory LRU cache, so repeated calls for the same year cost a single hash lookup. Cached collections are frozen and shared, so treat the arrays returned by `holidays`, `holidays_names`, and `holidays_dates` as read-only.
+
+The defaults work out of the box, but you can tune or disable the cache:
+
+```ruby
+HolidayCo.configure do |config|
+  config.cache_enabled = false # defaults to true
+  config.cache_size = 128      # max years kept in memory; defaults to 64
+end
+
+# Empty the cache manually (handy between tests):
+HolidayCo.clear_cache!
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub. This project is intended to be a safe, welcoming space for collaboration.

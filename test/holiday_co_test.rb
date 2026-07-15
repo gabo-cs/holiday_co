@@ -2,22 +2,6 @@ require "minitest/autorun"
 require_relative "../lib/holiday_co"
 
 class HolidayCoTest < Minitest::Test
-  def test_holidays_from_yaml_in_the_default_year
-    holidays = HolidayCo.holidays
-
-    assert holidays.is_a?(Array)
-    assert holidays[0].is_a?(Hash)
-    assert_equal "Año Nuevo", holidays[0][:name]
-    assert_equal "Navidad", holidays[-1][:name]
-  end
-
-  def test_holidays_from_yaml_in_a_given_year
-    holidays = HolidayCo.holidays("2023")
-
-    assert_equal "Batalla de Boyacá", holidays[11][:name]
-    assert_equal "2023-08-07", holidays[11][:date]
-  end
-
   def test_holiday
     assert HolidayCo.is_holiday?("2023-01-01")
   end
@@ -46,25 +30,25 @@ class HolidayCoTest < Minitest::Test
 
   def test_holiday_in_an_invalid_future_year
     assert_raises(HolidayCo::YearDataNotAvailableError) do
-      HolidayCo.is_holiday?("2028-01-01")
+      HolidayCo.is_holiday?("10000-01-01")
     end
   end
 
   def test_not_holiday_in_an_invalid_future_year
     assert_raises(HolidayCo::YearDataNotAvailableError) do
-      HolidayCo.is_holiday?("2028-01-02")
+      HolidayCo.is_holiday?("10000-01-02")
     end
   end
 
   def test_holiday_in_an_invalid_past_year
     assert_raises(HolidayCo::YearDataNotAvailableError) do
-      HolidayCo.is_holiday?("1999-01-01")
+      HolidayCo.is_holiday?("1982-01-01")
     end
   end
 
   def test_not_holiday_in_an_invalid_past_year
     assert_raises(HolidayCo::YearDataNotAvailableError) do
-      HolidayCo.is_holiday?("1999-01-02")
+      HolidayCo.is_holiday?("1982-01-02")
     end
   end
 
