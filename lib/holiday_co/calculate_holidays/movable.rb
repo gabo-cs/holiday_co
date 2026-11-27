@@ -26,8 +26,6 @@ module HolidayCo
     class Movable
       using NextMondayRefinement
 
-      # Holidays that are moved to the following Monday
-      # if they don't fall on a Monday.
       MOVABLE_HOLIDAYS = {
         "Epifanía" => "%4s-01-06",
         "Día de San José" => "%4s-03-19",
