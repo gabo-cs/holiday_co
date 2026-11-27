@@ -26,7 +26,7 @@ module HolidayCo
           operation: :-,
           days: 2
         },
-        "Ascención de Jesús" => {
+        "Ascensión de Jesús" => {
           operation: :+,
           days: 43
         },
