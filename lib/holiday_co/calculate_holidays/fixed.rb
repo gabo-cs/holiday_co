@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-#  Dates are in YYYY-MM-DD format
 module HolidayCo
   module CalculateHolidays
+    # Holidays that always fall on the same calendar date, whatever day of
+    # the week it is.
+    #
+    # Fixed.for(year) returns an array of { name:, date: } hashes, with dates
+    # as "YYYY-MM-DD" strings.
     class Fixed
       FIXED_HOLIDAYS = {
         "Año Nuevo" => "%4s-01-01",

@@ -12,14 +12,22 @@ module NextMondayRefinement
   end
 end
 
-#  Dates are in YYYY-MM-DD format
 module HolidayCo
   module CalculateHolidays
+    # Holidays covered by Ley 51 de 1983 (the "Ley Emiliani"). They have a
+    # nominal date, but if that date isn't a Monday, the holiday is observed
+    # on the following Monday.
+    #
+    # Holidays added after 1983 are listed in EFFECTIVE_SINCE and are left
+    # out for years before they took effect.
+    #
+    # Movable.for(year) returns an array of { name:, date: } hashes, with
+    # dates as "YYYY-MM-DD" strings.
     class Movable
       using NextMondayRefinement
 
       # Holidays that are moved to the following Monday
-      # if they don"t fall on a Monday.
+      # if they don't fall on a Monday.
       MOVABLE_HOLIDAYS = {
         "Epifanía" => "%4s-01-06",
         "Día de San José" => "%4s-03-19",

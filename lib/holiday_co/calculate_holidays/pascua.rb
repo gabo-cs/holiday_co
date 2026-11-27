@@ -3,9 +3,19 @@
 require "date"
 require_relative "../utils"
 
-#  Dates are in YYYY-MM-DD format
 module HolidayCo
   module CalculateHolidays
+    # Holidays set relative to Easter Sunday (Domingo de Pascua), which
+    # changes every year. See HolidayCo.pascua_day_per_year for how it's
+    # calculated.
+    #
+    # Each holiday is a fixed number of days before or after Easter. The
+    # offsets after Easter already include the Ley Emiliani shift to Monday:
+    # Ascensión is Easter + 39 days, which is a Thursday, and is observed on
+    # the following Monday, Easter + 43.
+    #
+    # Pascua.for(year) returns an array of { name:, date: } hashes, with
+    # dates as "YYYY-MM-DD" strings.
     class Pascua
       PASCUA_HOLIDAYS = {
         "Jueves Santo" => {
